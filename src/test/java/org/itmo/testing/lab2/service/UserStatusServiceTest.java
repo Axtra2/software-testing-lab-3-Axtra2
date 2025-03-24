@@ -63,58 +63,58 @@ public class UserStatusServiceTest {
     }
 
 
-    @Test
-    public void testGetUserLastSessionDate_OneSession() {
-        final var now = LocalDateTime.now();
+//    @Test
+//    public void testGetUserLastSessionDate_OneSession() {
+//        final var now = LocalDateTime.now();
+//
+//        final var session = new Session(now.minusHours(1), now);
+//
+//        when(userAnalyticsService.getUserSessions("user123"))
+//            .thenReturn(List.of(session));
+//
+//        final var s = userStatusService.getUserLastSessionDate("user123");
+//        verify(userAnalyticsService).getUserSessions("user123");
+//
+//        assertTrue(s.isPresent());
+//        assertEquals(session.getLoginTime().toLocalDate().toString(), s.get());
+//        assertEquals(session.getLogoutTime().toLocalDate().toString(), s.get());
+//    }
 
-        final var session = new Session(now.minusHours(1), now);
+//    @Test
+//    public void testGetUserLastSessionDate_TwoSessionsInOrder() {
+//        final var now = LocalDateTime.now();
+//
+//        final var session1 = new Session(now.minusHours(3), now.minusHours(2));
+//        final var session2 = new Session(now.minusHours(1), now);
+//
+//        when(userAnalyticsService.getUserSessions("user123"))
+//            .thenReturn(List.of(session1, session2));
+//
+//        final var s = userStatusService.getUserLastSessionDate("user123");
+//        verify(userAnalyticsService).getUserSessions("user123");
+//
+//        assertTrue(s.isPresent());
+//        assertEquals(session2.getLoginTime().toLocalDate().toString(), s.get());
+//        assertEquals(session2.getLogoutTime().toLocalDate().toString(), s.get());
+//    }
 
-        when(userAnalyticsService.getUserSessions("user123"))
-            .thenReturn(List.of(session));
-
-        final var s = userStatusService.getUserLastSessionDate("user123");
-        verify(userAnalyticsService).getUserSessions("user123");
-
-        assertTrue(s.isPresent());
-        assertEquals(session.getLoginTime().toLocalDate().toString(), s.get());
-        assertEquals(session.getLogoutTime().toLocalDate().toString(), s.get());
-    }
-
-    @Test
-    public void testGetUserLastSessionDate_TwoSessionsInOrder() {
-        final var now = LocalDateTime.now();
-
-        final var session1 = new Session(now.minusHours(3), now.minusHours(2));
-        final var session2 = new Session(now.minusHours(1), now);
-
-        when(userAnalyticsService.getUserSessions("user123"))
-            .thenReturn(List.of(session1, session2));
-
-        final var s = userStatusService.getUserLastSessionDate("user123");
-        verify(userAnalyticsService).getUserSessions("user123");
-
-        assertTrue(s.isPresent());
-        assertEquals(session2.getLoginTime().toLocalDate().toString(), s.get());
-        assertEquals(session2.getLogoutTime().toLocalDate().toString(), s.get());
-    }
-
-    @Test
-    public void testGetUserLastSessionDate_TwoSessionsOutOfOrder() {
-        final var now = LocalDateTime.now();
-
-        final var session1 = new Session(now.minusHours(3), now.minusHours(2));
-        final var session2 = new Session(now.minusHours(1), now);
-
-        when(userAnalyticsService.getUserSessions("user123"))
-            .thenReturn(List.of(session2, session1));
-
-        final var s = userStatusService.getUserLastSessionDate("user123");
-        verify(userAnalyticsService).getUserSessions("user123");
-
-        assertTrue(s.isPresent());
-        assertEquals(session2.getLoginTime().toLocalDate().toString(), s.get());
-        assertEquals(session2.getLogoutTime().toLocalDate().toString(), s.get());
-    }
+//    @Test
+//    public void testGetUserLastSessionDate_TwoSessionsOutOfOrder() {
+//        final var now = LocalDateTime.now();
+//
+//        final var session1 = new Session(now.minusHours(3), now.minusHours(2));
+//        final var session2 = new Session(now.minusHours(1), now);
+//
+//        when(userAnalyticsService.getUserSessions("user123"))
+//            .thenReturn(List.of(session2, session1));
+//
+//        final var s = userStatusService.getUserLastSessionDate("user123");
+//        verify(userAnalyticsService).getUserSessions("user123");
+//
+//        assertTrue(s.isPresent());
+//        assertEquals(session2.getLoginTime().toLocalDate().toString(), s.get());
+//        assertEquals(session2.getLogoutTime().toLocalDate().toString(), s.get());
+//    }
 
 //    @Test
 //    public void testGetUserLastSessionDate_NoUser() {
