@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'jacoco'
     id 'io.qameta.allure' version '2.12.0'
+    id 'com.diffplug.spotless' version '7.0.2'
 }
 
 group = 'org.usvm'
@@ -16,7 +17,6 @@ dependencies {
     implementation("io.javalin:javalin:6.4.0")
     implementation("org.slf4j:slf4j-simple:2.0.16")
     implementation("com.google.code.gson:gson:2.12.1")
-
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation("io.rest-assured:rest-assured:5.5.1")
@@ -53,4 +53,41 @@ allure {
         reportDir.set(project.reporting.baseDirectory.dir("allure-report"))
         dependsOnTests.set(true)
     }
+}
+
+// spotless {
+//   // optional: limit format enforcement to just the files changed by this feature branch
+//   ratchetFrom 'origin/main'
+//   java {
+//     // don't need to set target, it is inferred from java
+
+//     // apply a specific flavor of google-java-format
+//     // googleJavaFormat('1.17').aosp().reflowLongStrings().skipJavadocFormatting()
+//     // fix formatting of type annotations
+//     formatAnnotations()
+
+//     // make sure every file has the following copyright header.
+//     // optionally, Spotless can set copyright years by digging
+//     // through git history (see "license" section below)
+//     licenseHeader '/* (C)$YEAR */'
+//   }
+// }
+
+spotless {
+  java {
+    // Use the default importOrder configuration
+    importOrder()
+
+    removeUnusedImports()
+
+    // Cleanthat will refactor your code, but it may break your style: apply it before your formatter
+    cleanthat()          // has its own section below
+
+    // Choose one of these formatters.
+    googleJavaFormat()   // has its own section below
+
+    formatAnnotations()  // fixes formatting of type annotations, see below
+
+    licenseHeader '/* (C) $YEAR */' // or licenseHeaderFile
+  }
 }
